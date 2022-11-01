@@ -1,4 +1,4 @@
-package com.orttp3.parcialtallerdeprogramacion3
+package com.orttp3.parcialtallerdeprogramacion3.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.orttp3.parcialtallerdeprogramacion3.R
 import com.orttp3.parcialtallerdeprogramacion3.databinding.FragmentFirstBinding
 
 /**
