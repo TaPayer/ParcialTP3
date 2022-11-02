@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="princetonOrange">#EE8434</color>
+    <color name="indianRed">#C95D63</color>
+    <color name="EnglishLavender">#AE8799</color>
+    <color name="Glaucos">#717EC3</color>
+    <color name="RoyalBlueLigth">#496DDB</color>
 </resources>
