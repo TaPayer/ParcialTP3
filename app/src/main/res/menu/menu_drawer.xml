@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/storeFragment"
+        android:icon="@drawable/settings"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/settings"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/settings"
+        android:title="Mis Preferencias" />
+
+    <item
+        android:id="@+id/loginFragment"
+        android:icon="@drawable/settings"
+        android:title="Logout" />
+
+</menu>
