@@ -1,7 +1,9 @@
 package com.ar.ort.rickmorty.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -10,13 +12,16 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ar.ort.rickmorty.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var navView: NavigationView
     private lateinit var drawer: DrawerLayout
-
+    lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         //buscar el DrawerLayout
         drawer = findViewById(R.id.drawer_layout_id)
+        navigate()
 
         //menu hamburguesa -> comentado para que no aparezca la flecha
         //NavigationUI.setupActionBarWithNavController(this,navController,drawer)
@@ -47,18 +53,18 @@ class MainActivity : AppCompatActivity() {
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
 
         )
-
         //Seteo la configuración
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        //Dejo un lisener para cuando se produce el cambio de destino unicamente me reemplace el icono.
+        //Dejo un listener para cuando se produce el cambio de destino unicamente me reemplace el icono.
         navController.addOnDestinationChangedListener { _, _, _ ->
             supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburguer)
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        //Fuezo al boton de navegación de la toolbar que solo abra el menú Drawer
+            //Fuezo al boton de navegación de la toolbar que solo abra el menú Drawer
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
@@ -69,12 +75,54 @@ class MainActivity : AppCompatActivity() {
         //return NavigationUI.navigateUp(navController,drawer)
         return false
 
+    }
+
+    private fun logOut() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient.signOut().addOnCompleteListener {
+            val intent = Intent(this, SplashActivity::class.java)
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+            SplashActivity.prefs.setEmail("")
+            SplashActivity.prefs.setUsername("")
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun navigate(){
+        navView.setNavigationItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            drawer.closeDrawer(GravityCompat.START)
+            when (id) {
+                R.id.storeFragment -> {
+                    true
+                }
+                R.id.favoritesFragment -> {
+                    true
+                }
+                R.id.settingsFragment -> {
+                    true
+                }
+                R.id.loginFragment -> {
+                    logOut()
+                    true
+                }
+                else -> {
+                    false
+                }
+
+            }
+        }
 
     }
+}
 
     // MENU TRES PUNTITOS
     //override fun onCreateOptionsMenu(menu: Menu): Boolean {
     //   menuInflater.inflate(R.menu.menu_drawer, menu)
     //   return true
     // }
-}
