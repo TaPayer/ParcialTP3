@@ -2,6 +2,8 @@ package com.ar.ort.rickmorty.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -10,7 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.api.APIService
+import com.ar.ort.rickmorty.data.ServiceResponse
 import com.google.android.material.navigation.NavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -22,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Buscar el nav host fragment de la vista - NavController
         navController = Navigation.findNavController(this, R.id.fragment_container_view)
 
@@ -76,5 +82,4 @@ class MainActivity : AppCompatActivity() {
     //override fun onCreateOptionsMenu(menu: Menu): Boolean {
     //   menuInflater.inflate(R.menu.menu_drawer, menu)
     //   return true
-    // }
 }

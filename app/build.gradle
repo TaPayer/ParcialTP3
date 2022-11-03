@@ -66,4 +66,15 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    //toma json y crea una data class
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.5.0"
+
+    //Interceptor de HTTP
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    
+    //Conversor de imagenes
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
