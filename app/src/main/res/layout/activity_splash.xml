@@ -17,6 +17,7 @@
         android:text="ESTO ES UN SPLASH"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,90 +27,67 @@
         android:id="@+id/logoApp"
         android:layout_width="233dp"
         android:layout_height="220dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117"
+        app:layout_constraintVertical_bias="0.066"
         app:srcCompat="@drawable/logoapp" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/bienvenidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/comfortaa_regular"
         android:text="@string/welcome"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logoApp" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/marca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/comfortaa_regular"
         android:text="@string/tittle_app"
         android:textColor="@color/black"
         android:textSize="36sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bienvenidos" />
 
-    <EditText
-        android:visibility="gone"
-        android:id="@+id/input_user"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:fontFamily="@font/comfortaa_regular"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="@string/login_user"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
 
-    <EditText
-        android:visibility="gone"
-        android:id="@+id/input_pass"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:fontFamily="@font/comfortaa_regular"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="@string/login_pass"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/googleLogo"
+        android:layout_width="170dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintTop_toBottomOf="@+id/marca"
+        app:srcCompat="@drawable/google" />
 
     <Button
-        android:visibility="gone"
         android:id="@+id/btnContinuar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_button"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_pass"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintTop_toBottomOf="@+id/googleLogo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
