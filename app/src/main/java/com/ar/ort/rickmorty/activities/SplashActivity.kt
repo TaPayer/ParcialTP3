@@ -112,15 +112,14 @@ class SplashActivity : AppCompatActivity() {
         splash = findViewById(R.id.splash)
         logoApp = findViewById(R.id.logoApp)
         bienvenidos = findViewById(R.id.bienvenidos)
-        marca = findViewById(R.id.marca)
+
         googleLogo = findViewById(R.id.googleLogo)
         btnContinuar = findViewById(R.id.btnContinuar)
     }
 
     private fun visibility() {
-        logoApp.visibility = View.VISIBLE
+
         bienvenidos.visibility = View.VISIBLE
-        marca.visibility = View.VISIBLE
         googleLogo.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
         splash.visibility = View.GONE
