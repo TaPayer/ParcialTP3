@@ -22,10 +22,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var splash: TextView
-    lateinit var logoApp: ImageView
     lateinit var googleLogo: ImageView
-    lateinit var bienvenidos: TextView
-    lateinit var marca: TextView
     lateinit var btnContinuar: Button
     val Req_Code: Int = 123
 
@@ -110,16 +107,11 @@ class SplashActivity : AppCompatActivity() {
 
     private fun findViewById() {
         splash = findViewById(R.id.splash)
-        logoApp = findViewById(R.id.logoApp)
-        bienvenidos = findViewById(R.id.bienvenidos)
-
         googleLogo = findViewById(R.id.googleLogo)
         btnContinuar = findViewById(R.id.btnContinuar)
     }
 
     private fun visibility() {
-
-        bienvenidos.visibility = View.VISIBLE
         googleLogo.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
         splash.visibility = View.GONE
