@@ -21,17 +21,17 @@ import com.google.firebase.auth.GoogleAuthProvider
 class SplashActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var firebaseAuth: FirebaseAuth
-    lateinit var splash : TextView
+    lateinit var splash: TextView
     lateinit var logoApp: ImageView
-    lateinit var bienvenidos : TextView
-    lateinit var marca : TextView
-    lateinit var input_user : EditText
-    lateinit var input_pass : EditText
+    lateinit var bienvenidos: TextView
+    lateinit var marca: TextView
+    lateinit var input_user: EditText
+    lateinit var input_pass: EditText
     lateinit var btnContinuar: Button
     val Req_Code: Int = 123
 
     companion object {
-        private const val SPLASH_TIME_OUT:Long = 10000 // 3 seconds
+        private const val SPLASH_TIME_OUT: Long = 10000 // 3 seconds
         lateinit var prefs: SavedPreference
     }
 
@@ -47,21 +47,29 @@ class SplashActivity : AppCompatActivity() {
             {
                 visibility()
 
+            }, SPLASH_TIME_OUT
+        )
+
+        if (!prefs.getEmail().isEmpty()) {
+            startActivity(Intent(this, MainActivity::class.java))
+
+        } else {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+            firebaseAuth = FirebaseAuth.getInstance()
+
+            btnContinuar.setOnClickListener {
+                signInGoogle()
+                Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
             }
-            , SPLASH_TIME_OUT)
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        btnContinuar.setOnClickListener {
-            signInGoogle()
-            Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
         }
+
+
     }
 
     private fun signInGoogle() {
@@ -101,17 +109,17 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun findViewById(){
+    private fun findViewById() {
         splash = findViewById(R.id.splash)
         logoApp = findViewById(R.id.logoApp)
         bienvenidos = findViewById(R.id.bienvenidos)
         marca = findViewById(R.id.marca)
-        input_user= findViewById(R.id.input_user)
-        input_pass= findViewById(R.id.input_pass)
+        input_user = findViewById(R.id.input_user)
+        input_pass = findViewById(R.id.input_pass)
         btnContinuar = findViewById(R.id.btnContinuar)
     }
 
-    private fun visibility(){
+    private fun visibility() {
         logoApp.visibility = View.VISIBLE
         bienvenidos.visibility = View.VISIBLE
         marca.visibility = View.VISIBLE
