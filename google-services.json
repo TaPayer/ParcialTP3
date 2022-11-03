@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1093587897175",
+    "project_id": "rickmorty-ec0da",
+    "storage_bucket": "rickmorty-ec0da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093587897175:android:e3c7055dec1d011f974c12",
+        "android_client_info": {
+          "package_name": "com.ar.ort.rickmorty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093587897175-5frkgg2bul4j5gar51jtbl5dol12a2r3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ar.ort.rickmorty",
+            "certificate_hash": "3940df5178281b5d9b74549e67352b89b5be4528"
+          }
+        },
+        {
+          "client_id": "1093587897175-v88jq2mb88vpfl8pn4r27sk1qr0n4lk3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX6Y1lEh8FX6CbBxqu4NVtJ6FEPCX6LGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093587897175-v88jq2mb88vpfl8pn4r27sk1qr0n4lk3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
