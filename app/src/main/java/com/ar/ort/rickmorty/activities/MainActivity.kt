@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-            //Fuezo al boton de navegación de la toolbar que solo abra el menú Drawer
+        //Fuezo al boton de navegación de la toolbar que solo abra el menú Drawer
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
@@ -93,18 +93,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigate(){
+    private fun navigate() {
         navView.setNavigationItemSelectedListener { menuItem ->
             val id = menuItem.itemId
             drawer.closeDrawer(GravityCompat.START)
             when (id) {
                 R.id.storeFragment -> {
+                    Navigation.findNavController(this, R.id.fragment_container_view)
+                        .navigate(R.id.storeFragment)
                     true
                 }
                 R.id.favoritesFragment -> {
+                    Navigation.findNavController(this, R.id.fragment_container_view)
+                        .navigate(R.id.favoritesFragment)
                     true
                 }
                 R.id.settingsFragment -> {
+                    Navigation.findNavController(this, R.id.fragment_container_view)
+                        .navigate(R.id.settingsFragment)
                     true
                 }
                 R.id.loginFragment -> {
@@ -121,8 +127,8 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-    // MENU TRES PUNTITOS
-    //override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    //   menuInflater.inflate(R.menu.menu_drawer, menu)
-    //   return true
-    // }
+// MENU TRES PUNTITOS
+//override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//   menuInflater.inflate(R.menu.menu_drawer, menu)
+//   return true
+// }
