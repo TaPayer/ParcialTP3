@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class OriginData(
     @field:SerializedName("name") val name: String,
-    @field:SerializedName("name") val x: String,
+
 )
