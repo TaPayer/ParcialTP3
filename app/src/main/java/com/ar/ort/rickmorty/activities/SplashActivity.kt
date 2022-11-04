@@ -4,10 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.ar.ort.rickmorty.Entities.SavedPreference
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.api.APIService
+import com.ar.ort.rickmorty.data.ServiceResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,6 +20,9 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SplashActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -34,6 +40,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        callApi()
         prefs = SavedPreference(this)
         FirebaseApp.initializeApp(this)
 
@@ -115,6 +122,32 @@ class SplashActivity : AppCompatActivity() {
         googleLogo.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
         splash.visibility = View.GONE
+    }
+
+    private fun callApi() {
+        val api = APIService.createAPI()
+
+        api.getCharacters()?.enqueue(object : Callback<ServiceResponse?> {
+            override fun onResponse(
+                call: Call<ServiceResponse?>,
+                response: Response<ServiceResponse?>
+            ) {
+                val response: ServiceResponse? = (response.body())!!
+                Log.w("SPLASH LLAMADA", "$response")
+                if (response != null) {
+                    for (character in response.results) {
+                        //markers.add(DeaMarker(dea!!.id, dea!!.latitude.value.toDouble(), dea!!.longitude.value.toDouble(), dea!!.active.value, dea!!.datestamp.value, dea!!.address.value))
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ServiceResponse?>, t: Throwable) {
+                Toast.makeText (applicationContext,
+                    "Se ha producido un error de carga",
+                    Toast.LENGTH_SHORT)
+                    .show();
+            }
+        })
     }
 }
 
