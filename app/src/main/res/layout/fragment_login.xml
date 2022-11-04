@@ -54,7 +54,7 @@
         android:fontFamily="@font/comfortaa_regular"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:hint="@string/login_user"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -70,7 +70,7 @@
         android:fontFamily="@font/comfortaa_regular"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:hint="@string/login_pass"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

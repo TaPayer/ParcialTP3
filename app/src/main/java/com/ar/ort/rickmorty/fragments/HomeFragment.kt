@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         super.onStart()
 
         //Hardcodeado para testeo
-        for (i in 1..4) {
+        for (i in 1..10) {
             characters.add(Character("Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200"))
         }
 
