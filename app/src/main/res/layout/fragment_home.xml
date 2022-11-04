@@ -5,7 +5,8 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/frameLayout8"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".fragments.HomeFragment">
+tools:context=".fragments.HomeFragment"
+android:background="@drawable/bg_personajes">
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rec_characters"
@@ -20,11 +21,13 @@ tools:context=".fragments.HomeFragment">
     app:layout_constraintTop_toBottomOf="@+id/searchView"
     app:layout_constraintVertical_bias="0.0" />
 
-<SearchView
-    android:id="@+id/searchView"
-    android:layout_width="match_parent"
-    android:layout_height="75dp"
-    android:layout_margin="10dp"
-    tools:layout_editor_absoluteX="9dp"
-    tools:layout_editor_absoluteY="32dp" />
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
