@@ -98,9 +98,9 @@ class MainActivity : AppCompatActivity() {
             val id = menuItem.itemId
             drawer.closeDrawer(GravityCompat.START)
             when (id) {
-                R.id.storeFragment -> {
+                R.id.homeFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
-                        .navigate(R.id.storeFragment)
+                        .navigate(R.id.homeFragment)
                     true
                 }
                 R.id.favoritesFragment -> {

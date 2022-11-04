@@ -18,13 +18,13 @@ class CharacterHolder(v: View) : RecyclerView.ViewHolder(v){
     }
 
     fun setName(name: String){
-        val txt: TextView = view.findViewById(R.id.character_name)
-        txt.text = name
+        val nameCh: TextView = view.findViewById(R.id.character_name)
+        nameCh.text = name
     }
 
     fun setStatus(status: String){
-        val txt: TextView = view.findViewById(R.id.character_status)
-        txt.text = status
+        val statusCh: TextView = view.findViewById(R.id.character_status)
+        statusCh.text = "Estatus: $status"
     }
 
     fun setImage(img: String) {

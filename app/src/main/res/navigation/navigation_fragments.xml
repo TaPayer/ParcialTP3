@@ -3,17 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_fragments"
-    app:startDestination="@id/characterListFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.ar.ort.rickmorty.fragments.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
-        <action
-            android:id="@+id/action_detailFragment_to_characterListFragment"
-            app:destination="@id/characterListFragment"
-            app:popUpTo="@id/characterListFragment" />
         <argument
             android:name="Character"
             app:argType="com.ar.ort.rickmorty.Entities.Character" />
@@ -29,24 +25,19 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
-        android:id="@+id/storeFragment"
-        android:name="com.ar.ort.rickmorty.fragments.StoreFragment"
-        android:label="fragment_store"
-        tools:layout="@layout/fragment_store" />
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ar.ort.rickmorty.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/characterListFragment"
-        android:name="com.ar.ort.rickmorty.fragments.CharacterListFragment"
-        android:label="fragment_character_list"
-        tools:layout="@layout/fragment_character_list" >
+        android:id="@+id/homeFragment"
+        android:name="com.ar.ort.rickmorty.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_characterListFragment_to_detailFragment"
+            android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment"
-            app:popUpTo="@id/characterListFragment"
-            app:popUpToInclusive="true" />/>
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
