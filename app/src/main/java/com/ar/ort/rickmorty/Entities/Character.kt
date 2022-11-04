@@ -1,16 +1,16 @@
 package com.ar.ort.rickmorty.Entities
 
-class Character(name: String?, status: String?, species: String?, origin: String?) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-    var name: String = ""
-    var status: String = ""
-    var species: String = ""
-    var origin: String = ""
+@Parcelize
+class Character(val name: String, val status: String, val img: String) : Parcelable {
+
+    val charName: String = name
+    val charStatus: String = status
+    val charImg: String = img
 
     init {
-        this.name = name!!
-        this.status = status!!
-        this.species = species!!
-        this.origin = origin!!
+
     }
 }

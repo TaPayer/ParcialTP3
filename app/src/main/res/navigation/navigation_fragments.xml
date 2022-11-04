@@ -3,13 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_fragments"
-    app:startDestination="@id/storeFragment">
+    app:startDestination="@id/characterListFragment">
 
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.ar.ort.rickmorty.fragments.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_characterListFragment"
+            app:destination="@id/characterListFragment"
+            app:popUpTo="@id/characterListFragment" />
+        <argument
+            android:name="Character"
+            app:argType="com.ar.ort.rickmorty.Entities.Character" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.ar.ort.rickmorty.fragments.FavoritesFragment"
@@ -30,4 +38,15 @@
         android:name="com.ar.ort.rickmorty.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/characterListFragment"
+        android:name="com.ar.ort.rickmorty.fragments.CharacterListFragment"
+        android:label="fragment_character_list"
+        tools:layout="@layout/fragment_character_list" >
+        <action
+            android:id="@+id/action_characterListFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/characterListFragment"
+            app:popUpToInclusive="true" />/>
+    </fragment>
 </navigation>

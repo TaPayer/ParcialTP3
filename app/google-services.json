@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "34263398689",
-    "project_id": "rickandmorty-31e68",
-    "storage_bucket": "rickandmorty-31e68.appspot.com"
+    "project_number": "770691440819",
+    "project_id": "tp3parcial",
+    "storage_bucket": "tp3parcial.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34263398689:android:719ead411e860e64f92660",
+        "mobilesdk_app_id": "1:770691440819:android:682f61fe528fb05b1d90c6",
         "android_client_info": {
           "package_name": "com.ar.ort.rickmorty"
         }
       },
       "oauth_client": [
         {
-          "client_id": "34263398689-3h3arq42lafuuto79pfadrqs6rok9gpf.apps.googleusercontent.com",
+          "client_id": "770691440819-va1au8saidnr1tusbg9d3eb6eh8efq0r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ar.ort.rickmorty",
-            "certificate_hash": "16997eba59154572d59759f21d0cec6a7630d8d5"
+            "certificate_hash": "dbc717831358acb10a044a15d64c59cd4c105eea"
           }
         },
         {
-          "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
+          "client_id": "770691440819-mtem0f7m0sd4vde54qjfb3r5vl32m544.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCTtwyEAa0SNaaAUlnroWbl_T-g8sW9dI4"
+          "current_key": "AIzaSyBFFwPCXKvu0z3jPLLIgR2ZAdvHOx_RxW4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
+              "client_id": "770691440819-mtem0f7m0sd4vde54qjfb3r5vl32m544.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

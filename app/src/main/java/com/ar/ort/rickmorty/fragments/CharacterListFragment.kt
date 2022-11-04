@@ -1,10 +1,12 @@
 package com.ar.ort.rickmorty.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ar.ort.rickmorty.R
@@ -37,15 +39,11 @@ class CharacterListFragment : Fragment() {
 
     override fun onStart(){
         super.onStart()
-
-        //for(i in 1≤..≤10 ){
-        //}
-
+        
         //Hardcodeado para testeo
-        //characters.add(Character( "Manzanares 3271", 1))
-        //characters.add(Character( "Calle falsa 123", 2))
-        //characters.add(Character( "Maipu 1855", 3))
-        //characters.add(Character( "Sarlanga 32C", 4))
+        for (i in 1..4) {
+            characters.add(Character("Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200"))
+        }
 
         recCharacters.setHasFixedSize(true)
         linearlayoutManager = LinearLayoutManager(context)
@@ -56,7 +54,11 @@ class CharacterListFragment : Fragment() {
     }
 
     fun onItemClick( position : Int) : Boolean{
-        Snackbar.make(v,position.toString(), Snackbar.LENGTH_SHORT).show()
+        // PARA NAVEGAR A LA VENTANA DE DETALLE
+        val character = characters[position]
+        Log.i(character.toString(), "QUE ES PRODUCTO")
+        val action = CharacterListFragmentDirections.actionCharacterListFragmentToDetailFragment(character)
+        view?.findNavController()?.navigate(action)
         return true
     }
 }
