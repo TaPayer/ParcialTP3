@@ -24,8 +24,10 @@ class CharacterListAdapter(
     override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
         holder.setName(charactersList[position].charName)
         holder.setStatus(charactersList[position].charStatus)
+        holder.setOrigen(charactersList[position].charOrigen)
         holder.setImage(charactersList[position].charImg)
-        //holder.setOrigin(charactersList[position].origin)
+        holder.setEspecie(charactersList[position].charEspecie)
+
         holder.getCardLayout().setOnClickListener{
             onItemClick(position)
         }

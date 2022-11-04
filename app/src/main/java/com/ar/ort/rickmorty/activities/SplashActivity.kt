@@ -31,6 +31,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var googleLogo: ImageView
     lateinit var btnContinuar: Button
     val Req_Code: Int = 123
+    private val personajes = ArrayList<Character>()
 
     companion object {
         private const val SPLASH_TIME_OUT: Long = 10000 // 3 seconds
@@ -129,19 +130,27 @@ class SplashActivity : AppCompatActivity() {
 
         api.getCharacters()?.enqueue(object : Callback<ServiceResponse?> {
             override fun onResponse(
-                call: Call<ServiceResponse?>,
-                response: Response<ServiceResponse?>
+                call: retrofit2.Call<ServiceResponse?>,
+                response: retrofit2.Response<ServiceResponse?>
             ) {
                 val response: ServiceResponse? = (response.body())!!
                 Log.w("SPLASH LLAMADA", "$response")
                 if (response != null) {
-                    for (character in response.results) {
-                        //markers.add(DeaMarker(dea!!.id, dea!!.latitude.value.toDouble(), dea!!.longitude.value.toDouble(), dea!!.active.value, dea!!.datestamp.value, dea!!.address.value))
+                    for (ch in response.results) {
+                        personajes.add(Character(
+                            ch!!.id.toChar(),
+                 /*         NO LO PUEDO ENCGANCHAR!
+                            ch!!.name,
+                            ch!!.status,
+                            ch!!.species,
+                            ch!!.image,
+                            ch!!.origin.name,*/
+                           ))
                     }
                 }
             }
 
-            override fun onFailure(call: Call<ServiceResponse?>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<ServiceResponse?>, t: Throwable) {
                 Toast.makeText (applicationContext,
                     "Se ha producido un error de carga",
                     Toast.LENGTH_SHORT)

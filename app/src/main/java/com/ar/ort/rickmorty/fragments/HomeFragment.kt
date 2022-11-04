@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
 
         //Hardcodeado para testeo
         for (i in 1..10) {
-            characters.add(Character("Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200"))
+            characters.add(Character(1,"Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200", "Earht", "Human"))
         }
 
         recCharacters.setHasFixedSize(true)

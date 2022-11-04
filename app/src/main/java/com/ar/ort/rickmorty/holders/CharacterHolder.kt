@@ -34,6 +34,14 @@ class CharacterHolder(v: View) : RecyclerView.ViewHolder(v){
             .into(charImage)
     }
 
+    fun setOrigen(origen: String) {
+        val origenCh: TextView = view.findViewById(R.id.character_status)
+        origenCh.text = "Origen: $origen"
+    }
+    fun setEspecie(especie: String) {
+        val especieCh: TextView = view.findViewById(R.id.character_status)
+        especieCh.text = "Especie: $especie"
+    }
     fun getCardLayout(): CardView {
         return view.findViewById(R.id.card_package_item)
     }
