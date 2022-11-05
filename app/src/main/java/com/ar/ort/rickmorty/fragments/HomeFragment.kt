@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         super.onStart()
         //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
         if (prefs.getTipoLista() == "favoritos") {
+            characters = (activity as MainActivity).getFavoritos()
             Log.d("PERSONAMANACTVITIARGS", "favoritos")
         } else {
             characters = (activity as MainActivity).getCharacters()

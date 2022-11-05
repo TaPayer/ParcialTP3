@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.bumptech.glide.Glide
 
 
@@ -21,6 +22,12 @@ class DetailFragment : Fragment() {
     lateinit var charImg: ImageView
     lateinit var charName: TextView
     lateinit var charStatus: TextView
+    lateinit var charOrigen: TextView
+    lateinit var charEspecie: TextView
+    lateinit var cruz: ImageView
+    lateinit var unknow: ImageView
+    lateinit var alive: ImageView
+
 
     var characters: MutableList<Character> = ArrayList<Character>()
 
@@ -34,10 +41,15 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        vista =  inflater.inflate(R.layout.fragment_detail, container, false)
+        vista = inflater.inflate(R.layout.fragment_detail, container, false)
 
+        cruz = vista.findViewById(R.id.cruz)
+        unknow = vista.findViewById(R.id.unknow)
+        alive = vista.findViewById(R.id.alive)
         charName = vista.findViewById(R.id.character_name)
         charStatus = vista.findViewById(R.id.character_status)
+        charOrigen = vista.findViewById(R.id.character_origen)
+        charEspecie = vista.findViewById(R.id.character_especie)
         charImg = vista.findViewById(R.id.imageChar)
         btnFav = vista.findViewById(R.id.buttonFav)
 
@@ -48,24 +60,44 @@ class DetailFragment : Fragment() {
         super.onStart()
 
         // LO QUE VIENE DEL LISTADO DE PRODUCTOS
-        charName.text = DetailFragmentArgs.fromBundle(requireArguments()).character.charName
-        val status = DetailFragmentArgs.fromBundle(requireArguments()).character.charStatus
-        charStatus.text = "Estatus $status"
-        val img = DetailFragmentArgs.fromBundle(requireArguments()).character.charImg
+        val personaje = DetailFragmentArgs.fromBundle(requireArguments()).character
 
+        charName.text = DetailFragmentArgs.fromBundle(requireArguments()).character.charName
+
+        val origen = DetailFragmentArgs.fromBundle(requireArguments()).character.origen
+        charOrigen.text = "Origen $origen"
+
+        val especie = DetailFragmentArgs.fromBundle(requireArguments()).character.charEspecie
+        charEspecie.text = "Especie $especie"
+
+        val status = DetailFragmentArgs.fromBundle(requireArguments()).character.charStatus
+        charStatus.text = "Status $status"
+
+        if (status == "Dead") {
+            cruz.visibility = View.VISIBLE
+        }
+        if (status == "unknown") {
+            unknow.visibility = View.VISIBLE
+        } else {alive.visibility = View.VISIBLE}
+
+        val img = DetailFragmentArgs.fromBundle(requireArguments()).character.charImg
         Glide.with(vista)
             .load(img)
             .into(charImg)
 
         //VOLVER AL LISTADO
-        btnFav.setOnClickListener{
-           //aca agrega el personaje a la lista de favoritos
+        btnFav.setOnClickListener {
+            //aca agrega el personaje a la lista de favoritos
             Toast.makeText(getActivity(), "Agregado a Favoritos", Toast.LENGTH_SHORT).show();
+            //Hardcodeado para testeo
+
+            prefs.agregarFavoritos(personaje)
+
 
         }
-
-
     }
 
 
 }
+
+
