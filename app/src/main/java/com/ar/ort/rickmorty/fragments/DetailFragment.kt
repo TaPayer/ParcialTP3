@@ -22,6 +22,8 @@ class DetailFragment : Fragment() {
     lateinit var charName: TextView
     lateinit var charStatus: TextView
 
+    var characters: MutableList<Character> = ArrayList<Character>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +61,7 @@ class DetailFragment : Fragment() {
         btnFav.setOnClickListener{
            //aca agrega el personaje a la lista de favoritos
             Toast.makeText(getActivity(), "Agregado a Favoritos", Toast.LENGTH_SHORT).show();
+
         }
 
 

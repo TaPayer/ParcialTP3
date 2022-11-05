@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ar.ort.rickmorty.Entities.Character
+import com.ar.ort.rickmorty.Entities.SavedPreference
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.ar.ort.rickmorty.fragments.HomeFragment
@@ -23,22 +24,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var navView: NavigationView
     private lateinit var drawer: DrawerLayout
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var personajes : ArrayList<Character>
+    private lateinit var personajes: ArrayList<Character>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        personajes = intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
+        personajes =
+            intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
 
         //Buscar el nav host fragment de la vista - NavController
         navController = Navigation.findNavController(this, R.id.fragment_container_view)
@@ -90,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getCharacters() : ArrayList<Character>{
+    fun getCharacters(): ArrayList<Character> {
         return this.personajes
     }
 
@@ -110,8 +108,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun navigate() {
         navView.setNavigationItemSelectedListener { menuItem ->
             val id = menuItem.itemId
@@ -120,13 +116,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
                         .navigate(R.id.homeFragment)
-                    //@GERMAN aca tiene que ir el metodo que manda el array  general (personajes que ya viene desde el splah aca) x parametro
+
+                    prefs.setTipoLista("listaEntera")
+                    Log.d("PERSONAMANACTVITIARGS", "listaEntera")
                     true
                 }
+
                 R.id.favoritesFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
                         .navigate(R.id.homeFragment)
-                    //@GERMAN aca tiene que ir el metodo que manda el array de favoritos x parametro
+                    prefs.setTipoLista("favoritos")
+                    Log.d("PERSONAMANACTVITIARGS", "favoritos")
                     true
                 }
                 R.id.settingsFragment -> {
@@ -144,11 +144,7 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
-
     }
-
-
-
 
 }
 

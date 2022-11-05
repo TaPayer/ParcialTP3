@@ -22,11 +22,11 @@ class HomeFragment : Fragment() {
     lateinit var v: View
 
     lateinit var recCharacters: RecyclerView
-    var characters: ArrayList<Character> = ArrayList<Character>()
+    var characters: MutableList<Character> = ArrayList<Character>()
 
     private lateinit var linearlayoutManager: LinearLayoutManager
     private lateinit var characterListAdapter: CharacterListAdapter
-    private lateinit var gridLayoutManager :GridLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -39,15 +39,17 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false)
         recCharacters = v.findViewById(R.id.rec_characters)
-
-
-
         return v
     }
 
-    override fun onStart(){
+    override fun onStart() {
         super.onStart()
-        characters = (activity as MainActivity).getCharacters()
+        //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
+        if (prefs.getTipoLista() == "favoritos") {
+            Log.d("PERSONAMANACTVITIARGS", "favoritos")
+        } else {
+            characters = (activity as MainActivity).getCharacters()
+        }
 
         recCharacters.setHasFixedSize(true)
 
@@ -56,30 +58,26 @@ class HomeFragment : Fragment() {
         val numberOfColumns = 2
         gridLayoutManager = GridLayoutManager(context, numberOfColumns)
 
-
-
         recCharacters.layoutManager = gridLayoutManager
 
-        recCharacters.adapter = CharacterListAdapter(characters){ x ->
+        recCharacters.adapter = CharacterListAdapter(characters) { x ->
             onItemClick(x)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        characters.clear()
-
+        //characters.clear()
     }
 
-    fun onItemClick( position : Int) : Boolean{
+    fun onItemClick(position: Int): Boolean {
         // PARA NAVEGAR A LA VENTANA DE DETALLE
         val character = characters[position]
-            Log.d(character.name.toString(), "QUE ES PRODUCTO")
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
-            view?.findNavController()?.navigate(action)
+        Log.d(character.name.toString(), "QUE ES PRODUCTO")
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
+        view?.findNavController()?.navigate(action)
 
         return true
     }
 }
-
 

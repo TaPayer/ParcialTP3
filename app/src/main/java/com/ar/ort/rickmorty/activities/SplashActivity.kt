@@ -61,6 +61,7 @@ class SplashActivity : AppCompatActivity() {
                     intent.putExtras(bundle)
                     startActivity(intent)
                     Log.w("PERSONAJESLOGUEADO", "$personajes")
+                    prefs.setTipoLista("listaEntera")
 
                 } else {
                     visibility()
@@ -120,7 +121,7 @@ class SplashActivity : AppCompatActivity() {
                 intent.putExtras(bundle)
                 startActivity(intent)
                 Log.w("PERSONAJESSINLOGUEAR", "$personajes")
-
+                prefs.setTipoLista("listaEntera")
                 //startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
