@@ -8,16 +8,26 @@ class SavedPreference(val context: Context) {
     private val EMAIL = "email"
     private val USERNAME = "username"
     private var PHOTO = "photo"
-    private var NAME = "name"
+    private var TIPOLISTA = "tipolista"
+    private var FAVORITOS = "favoritos"
+    var favoritos: MutableList<Character> = ArrayList<Character>()
 
     val storage = context.getSharedPreferences(SHARED_NAME, 0)
 
-    fun setTipoLista(name: String) {
-        storage.edit().putString(NAME, name).apply()
+    fun agregarFavoritos(character: Character ) {
+        favoritos.add(character)
+    }
+
+    fun getFavoritos(): String {
+        return storage.getString(TIPOLISTA, "")!!
+    }
+
+    fun setTipoLista(tipolista: String) {
+        storage.edit().putString(TIPOLISTA, tipolista).apply()
     }
 
     fun getTipoLista(): String {
-        return storage.getString(NAME, "")!!
+        return storage.getString(TIPOLISTA, "")!!
     }
 
 
