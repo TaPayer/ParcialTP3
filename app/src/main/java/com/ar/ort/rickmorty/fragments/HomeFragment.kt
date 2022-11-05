@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.activities.MainActivity
+import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.ar.ort.rickmorty.adapters.CharacterListAdapter
 
 
@@ -37,13 +39,26 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false)
         recCharacters = v.findViewById(R.id.rec_characters)
+
+
+
         return v
     }
 
     override fun onStart(){
         super.onStart()
 
-        //Hardcodeado para testeo
+        var personajes = prefs.getPersonajes()
+
+        Log.w("PERSONAJECHAR", "$personajes")
+        for (ch in personajes) {
+
+            Log.w("PERSONAJE cada uno", "$ch")
+
+            //characters.add(Character(ch.id, ch.name, ch.status, ch.origen,ch.especie, ch.img))
+        }
+
+ //Hardcodeado para testeo
         for (i in 1..10) {
             characters.add(Character(1,"Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200", "Earht", "Human"))
         }

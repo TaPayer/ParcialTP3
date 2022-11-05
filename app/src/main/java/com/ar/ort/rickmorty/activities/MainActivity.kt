@@ -1,9 +1,11 @@
 package com.ar.ort.rickmorty.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -11,11 +13,19 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
+import com.ar.ort.rickmorty.fragments.HomeFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
+
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -23,10 +33,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var personajes : ArrayList<Character>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //recibo los personaes desde el splash
+        personajes = intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
+        Log.w("PERSONAJESMAIN", "$personajes")
+
 
         //Buscar el nav host fragment de la vista - NavController
         navController = Navigation.findNavController(this, R.id.fragment_container_view)
@@ -38,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         //buscar el DrawerLayout
         drawer = findViewById(R.id.drawer_layout_id)
         navigate()
+        acciones()
 
         //menu hamburguesa -> comentado para que no aparezca la flecha
         //NavigationUI.setupActionBarWithNavController(this,navController,drawer)
@@ -77,6 +94,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     private fun logOut() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -92,6 +111,8 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
 
     private fun navigate() {
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -124,6 +145,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+
+    private fun acciones() {
+        // Agrego un listener para poder escuchar cada vez que se realiza una navegacion
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+
+            // Si mi destino es el login entonces oculto la barra inferior. Caso contrario la muestro
+            if (destination.id == R.id.homeFragment) {
+
+               /* FORMA POR BUNDLE
+                val f  =  HomeFragment()
+                val bundle = Bundle()
+                bundle.putParcelableArrayList("personajes", personajes)
+                f.setArguments(bundle)
+                */
+
+                prefs.setPersonajes(personajes)
+
+            } else {
+
+
+                // Si mi destino es la Home, tomo el userName que recibio por parametro y lo almaceno en un Object
+                if (destination.id == R.id.favoritesFragment) {
+
+                }
+            }
+        }
     }
 }
 
