@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //recibo los personaes desde el splash
+        //@GERMANrecibo los personaes desde el splash
         personajes = intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
         Log.w("PERSONAJESMAIN", "$personajes")
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         //buscar el DrawerLayout
         drawer = findViewById(R.id.drawer_layout_id)
         navigate()
-        acciones()
+
 
         //menu hamburguesa -> comentado para que no aparezca la flecha
         //NavigationUI.setupActionBarWithNavController(this,navController,drawer)
@@ -122,11 +122,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
                         .navigate(R.id.homeFragment)
+                    //@GERMAN aca tiene que ir el metodo que manda el array  general (personajes que ya viene desde el splah aca) x parametro
                     true
                 }
                 R.id.favoritesFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
-                        .navigate(R.id.favoritesFragment)
+                        .navigate(R.id.homeFragment)
+                    //@GERMAN aca tiene que ir el metodo que manda el array de favoritos x parametro
                     true
                 }
                 R.id.settingsFragment -> {
@@ -149,32 +151,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun acciones() {
-        // Agrego un listener para poder escuchar cada vez que se realiza una navegacion
-        navController.addOnDestinationChangedListener { _, destination, arguments ->
 
-            // Si mi destino es el login entonces oculto la barra inferior. Caso contrario la muestro
-            if (destination.id == R.id.homeFragment) {
-
-               /* FORMA POR BUNDLE
-                val f  =  HomeFragment()
-                val bundle = Bundle()
-                bundle.putParcelableArrayList("personajes", personajes)
-                f.setArguments(bundle)
-                */
-
-                prefs.setPersonajes(personajes)
-
-            } else {
-
-
-                // Si mi destino es la Home, tomo el userName que recibio por parametro y lo almaceno en un Object
-                if (destination.id == R.id.favoritesFragment) {
-
-                }
-            }
-        }
-    }
 }
 
 // MENU TRES PUNTITOS

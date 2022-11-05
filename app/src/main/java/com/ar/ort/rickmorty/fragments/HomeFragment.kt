@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
-import com.ar.ort.rickmorty.activities.MainActivity
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.ar.ort.rickmorty.adapters.CharacterListAdapter
 
@@ -22,7 +21,7 @@ class HomeFragment : Fragment() {
     lateinit var v: View
 
     lateinit var recCharacters: RecyclerView
-    var characters: MutableList<Character> = ArrayList<Character>()
+    var characters: ArrayList<Character> = ArrayList<Character>()
 
     private lateinit var linearlayoutManager: LinearLayoutManager
     private lateinit var characterListAdapter: CharacterListAdapter
@@ -48,15 +47,7 @@ class HomeFragment : Fragment() {
     override fun onStart(){
         super.onStart()
 
-        var personajes = prefs.getPersonajes()
-
-        Log.w("PERSONAJECHAR", "$personajes")
-        for (ch in personajes) {
-
-            Log.w("PERSONAJE cada uno", "$ch")
-
-            //characters.add(Character(ch.id, ch.name, ch.status, ch.origen,ch.especie, ch.img))
-        }
+  //@gGERMAN aca tiene que estar el que recibe lo que viene para llenar la lista characters
 
  //Hardcodeado para testeo
         for (i in 1..10) {
