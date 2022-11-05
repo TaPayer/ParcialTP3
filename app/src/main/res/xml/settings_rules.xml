@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:textColor="#5C6BC0"
+        android:title="Configuracion">
+
+    </PreferenceCategory>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="night_mode_setting"
+        android:title="Night Mode" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="buscador_setting"
+        android:title="Buscador habilitado" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="favoritos_setting"
+        android:title="Permitir agregar a favoritos" />
+</PreferenceScreen>
