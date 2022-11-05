@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.activities.MainActivity
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.ar.ort.rickmorty.adapters.CharacterListAdapter
 
@@ -46,13 +47,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart(){
         super.onStart()
-
-  //@gGERMAN aca tiene que estar el que recibe lo que viene para llenar la lista characters
-
- //Hardcodeado para testeo
-        for (i in 1..10) {
-            characters.add(Character(1,"Rickanmorti", "Alive", "https://picsum.photos/id/$i/200/200", "Earht", "Human"))
-        }
+        characters = (activity as MainActivity).getCharacters()
 
         recCharacters.setHasFixedSize(true)
 
