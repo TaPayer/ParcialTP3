@@ -42,10 +42,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        callApi()
-
         intent = Intent(this, MainActivity::class.java)
+        callApi()
 
         prefs = SavedPreference(this)
 
@@ -83,7 +81,6 @@ class SplashActivity : AppCompatActivity() {
 
             }, SPLASH_TIME_OUT
         )
-
     }
 
     private fun signInGoogle() {
@@ -118,17 +115,11 @@ class SplashActivity : AppCompatActivity() {
                 prefs.setUsername(account.displayName.toString())
                 prefs.savePhoto(account.photoUrl)
 
-
               val bundle = Bundle()
                 bundle.putParcelableArrayList("personajes", personajes)
                 intent.putExtras(bundle)
                 startActivity(intent)
                 Log.w("PERSONAJESSINLOGUEAR", "$personajes")
-
-
-
-
-
 
                 //startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -152,17 +143,16 @@ class SplashActivity : AppCompatActivity() {
         val api = APIService.createAPI()
 
         api.getCharacters()?.enqueue(object : Callback<ServiceResponse?> {
+
             override fun onResponse(
                 call: Call<ServiceResponse?>,
                 response: Response<ServiceResponse?>
             ) {
                 val response: ServiceResponse? = (response.body())!!
-                Log.w("SPLASH LLAMADA", "$response")
                 if (response != null) {
                     for (ch in response.results) {
-                        personajes.add(Character(ch!!.id, ch!!.name, ch!!.status, ch!!.image,ch!!.origin.toString(), ch!!.species))
+                        personajes.add(Character(ch!!.id, ch!!.name, ch!!.status, ch!!.image,ch!!.origin.name, ch!!.species))
                     }
-
                 }
             }
 

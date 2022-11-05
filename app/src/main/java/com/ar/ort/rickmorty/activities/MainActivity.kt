@@ -38,11 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //@GERMANrecibo los personaes desde el splash
         personajes = intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
-        Log.w("PERSONAJESMAIN", "$personajes")
-
 
         //Buscar el nav host fragment de la vista - NavController
         navController = Navigation.findNavController(this, R.id.fragment_container_view)
@@ -94,7 +90,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    fun getCharacters() : ArrayList<Character>{
+        return this.personajes
+    }
 
     private fun logOut() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
