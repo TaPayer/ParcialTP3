@@ -1,12 +1,12 @@
 package com.ar.ort.rickmorty.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.Entities.SavedPreference
 import com.ar.ort.rickmorty.R
@@ -42,38 +42,47 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
         callApi()
+
+        intent = Intent(this, MainActivity::class.java)
+
         prefs = SavedPreference(this)
-        FirebaseApp.initializeApp(this)
 
         findViewById()
 
         Handler().postDelayed(
             {
-                visibility()
+                FirebaseApp.initializeApp(this)
+
+                if (!prefs.getEmail().isEmpty()) {
+                    //startActivity(Intent(this, MainActivity::class.java))
+
+                    val bundle = Bundle()
+                    bundle.putParcelableArrayList("personajes", personajes)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                    Log.w("PERSONAJESLOGUEADO", "$personajes")
+
+                } else {
+                    visibility()
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build()
+
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    firebaseAuth = FirebaseAuth.getInstance()
+
+                    btnContinuar.setOnClickListener {
+                        signInGoogle()
+                        Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
 
             }, SPLASH_TIME_OUT
         )
-
-        if (!prefs.getEmail().isEmpty()) {
-            startActivity(Intent(this, MainActivity::class.java))
-
-        } else {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-            firebaseAuth = FirebaseAuth.getInstance()
-
-            btnContinuar.setOnClickListener {
-                signInGoogle()
-                Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
-            }
-
-        }
-
 
     }
 
@@ -108,7 +117,20 @@ class SplashActivity : AppCompatActivity() {
                 prefs.setEmail(account.email.toString())
                 prefs.setUsername(account.displayName.toString())
                 prefs.savePhoto(account.photoUrl)
-                startActivity(Intent(this, MainActivity::class.java))
+
+
+              val bundle = Bundle()
+                bundle.putParcelableArrayList("personajes", personajes)
+                intent.putExtras(bundle)
+                startActivity(intent)
+                Log.w("PERSONAJESSINLOGUEAR", "$personajes")
+
+
+
+
+
+
+                //startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
@@ -138,8 +160,9 @@ class SplashActivity : AppCompatActivity() {
                 Log.w("SPLASH LLAMADA", "$response")
                 if (response != null) {
                     for (ch in response.results) {
-                        //markers.add(DeaMarker(dea!!.id, dea!!.latitude.value.toDouble(), dea!!.longitude.value.toDouble(), dea!!.active.value, dea!!.datestamp.value, dea!!.address.value))
+                        personajes.add(Character(ch!!.id, ch!!.name, ch!!.status, ch!!.image,ch!!.origin.toString(), ch!!.species))
                     }
+
                 }
             }
 

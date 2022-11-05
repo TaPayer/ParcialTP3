@@ -39,5 +39,8 @@
             app:destination="@id/detailFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="personajeList"
+            app:argType="com.ar.ort.rickmorty.Entities.Character[]" />
     </fragment>
 </navigation>
