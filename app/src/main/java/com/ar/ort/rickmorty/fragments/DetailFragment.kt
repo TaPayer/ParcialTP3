@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.findNavController
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.bumptech.glide.Glide

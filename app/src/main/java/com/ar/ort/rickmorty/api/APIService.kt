@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService {
     companion object {
-        private const val BASE_URL = "https://rickandmortyapi.com/api/character/"
+        const val BASE_URL = "https://rickandmortyapi.com/api/character/"
         fun createAPI(): serviceAPI {
             val logger =
                 HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }

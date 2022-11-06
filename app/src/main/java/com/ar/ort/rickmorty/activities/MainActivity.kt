@@ -19,6 +19,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +67,8 @@ class MainActivity : AppCompatActivity() {
             supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburguer)
         }
 
+        //prefs.retriveSharedValue()
+        //prefs.retriveSharedValue()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -85,6 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getFavoritos(): MutableList<Character> {
+        prefs.retriveSharedValue()
         return prefs.favoritos.toMutableList()
     }
 
@@ -97,8 +103,8 @@ class MainActivity : AppCompatActivity() {
         mGoogleSignInClient.signOut().addOnCompleteListener {
             val intent = Intent(this, SplashActivity::class.java)
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
-            SplashActivity.prefs.setEmail("")
-            SplashActivity.prefs.setUsername("")
+            prefs.setEmail("")
+            prefs.setUsername("")
             startActivity(intent)
             finish()
         }
