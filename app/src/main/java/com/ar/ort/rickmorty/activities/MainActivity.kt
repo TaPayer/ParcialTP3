@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,10 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ar.ort.rickmorty.Entities.Character
-import com.ar.ort.rickmorty.Entities.SavedPreference
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
-import com.ar.ort.rickmorty.fragments.HomeFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -146,9 +143,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-// MENU TRES PUNTITOS
-//override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//   menuInflater.inflate(R.menu.menu_drawer, menu)
-//   return true
-// }

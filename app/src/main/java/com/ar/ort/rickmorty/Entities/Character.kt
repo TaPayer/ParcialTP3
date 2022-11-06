@@ -1,7 +1,6 @@
 package com.ar.ort.rickmorty.Entities
 
 import android.os.Parcelable
-import com.ar.ort.rickmorty.data.OriginData
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

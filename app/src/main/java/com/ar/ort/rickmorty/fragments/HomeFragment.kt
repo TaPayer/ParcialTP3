@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     lateinit var v: View
 
     lateinit var recCharacters: RecyclerView
-    var characters: MutableList<Character> = ArrayList<Character>()
+    var characters: MutableList<Character> = ArrayList()
 
     private lateinit var linearlayoutManager: LinearLayoutManager
     private lateinit var characterListAdapter: CharacterListAdapter

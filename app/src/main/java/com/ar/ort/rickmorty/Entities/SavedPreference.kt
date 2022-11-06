@@ -9,18 +9,22 @@ class SavedPreference(val context: Context) {
     private val USERNAME = "username"
     private var PHOTO = "photo"
     private var TIPOLISTA = "tipolista"
-    private var FAVORITOS = "favoritos"
-    var favoritos: MutableList<Character> = ArrayList<Character>()
+    var favoritos: MutableList<Character> = ArrayList()
 
     val storage = context.getSharedPreferences(SHARED_NAME, 0)
 
     fun agregarFavoritos(character: Character ) {
-        favoritos.add(character)
+        if(favoritos.isNotEmpty()){
+            for (personaje in favoritos) {
+                if(personaje.charName != character.charName){
+                    favoritos.add(character)
+                }
+            }
+        }else{
+            favoritos.add(character)
+        }
     }
 
-    fun getFavoritos(): String {
-        return storage.getString(TIPOLISTA, "")!!
-    }
 
     fun setTipoLista(tipolista: String) {
         storage.edit().putString(TIPOLISTA, tipolista).apply()
@@ -29,7 +33,6 @@ class SavedPreference(val context: Context) {
     fun getTipoLista(): String {
         return storage.getString(TIPOLISTA, "")!!
     }
-
 
     fun setEmail(email: String) {
         storage.edit().putString(EMAIL, email).apply()
@@ -45,10 +48,6 @@ class SavedPreference(val context: Context) {
 
     fun getUsername(): String {
         return storage.getString(USERNAME, "")!!
-    }
-
-    fun getPhoto(): String {
-        return storage.getString(PHOTO, "")!!
     }
 
     fun savePhoto(photo: Uri?) {
