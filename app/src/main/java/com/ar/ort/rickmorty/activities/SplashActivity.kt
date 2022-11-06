@@ -122,7 +122,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
                 Log.w("PERSONAJESSINLOGUEAR", "$personajes")
                 prefs.setTipoLista("listaEntera")
-                //startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }

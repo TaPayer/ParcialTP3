@@ -1,6 +1,7 @@
 package com.ar.ort.rickmorty.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -93,6 +94,7 @@ class DetailFragment : Fragment() {
             //aca agrega el personaje a la lista de favoritos
             Toast.makeText(getActivity(), "Agregado a Favoritos", Toast.LENGTH_SHORT).show();
             //Hardcodeado para testeo
+            Log.i("PERSONAJE", "${personaje.charName}")
 
             prefs.agregarFavoritos(personaje)
 

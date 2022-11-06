@@ -25,22 +25,3 @@ class APIService {
         }
     }
 }
-    /*
-    private fun callApi() {
-        val api = APIService.createAPI()
-
-        api.getCharacters()?.enqueue(object : Callback<ArrayList<ServiceResponse?>?> {
-            override fun onResponse(
-                call: Call<ServiceResponse?>,
-                response: Response<ServiceResponse?>
-            ) {
-                val response: ServiceResponse? = (response.body())!!
-                Log.w("SPLASH", "$response")
-                if (response != null) {
-                    Log.d("RESPONSE ", response.toString())
-                    for(character in response){
-                        //markers.add(DeaMarker(dea!!.id, dea!!.latitude.value.toDouble(), dea!!.longitude.value.toDouble(), dea!!.active.value, dea!!.datestamp.value, dea!!.address.value))
-                    }
-                }
-            }
-     */
