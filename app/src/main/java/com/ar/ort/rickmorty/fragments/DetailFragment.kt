@@ -78,7 +78,10 @@ class DetailFragment : Fragment() {
         }
         if (status == "unknown") {
             unknow.visibility = View.VISIBLE
-        } else {alive.visibility = View.VISIBLE}
+        }
+        if (status == "Alive") {
+            alive.visibility = View.VISIBLE
+        }
 
         val img = DetailFragmentArgs.fromBundle(requireArguments()).character.charImg
         Glide.with(vista)

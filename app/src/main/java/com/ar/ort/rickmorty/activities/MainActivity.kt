@@ -56,14 +56,9 @@ class MainActivity : AppCompatActivity() {
         //Creo una configuración para Toolbar
         appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(),
-            /*topLevelDestinationIds = setOf(
-                R.id.fragment1,
-                R.id.fragment2,
-                R.id.fragment3
-            ),*/
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
-
         )
+
         //Seteo la configuración
         setupActionBarWithNavController(navController, appBarConfiguration)
 

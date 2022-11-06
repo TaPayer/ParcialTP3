@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var linearlayoutManager: LinearLayoutManager
     private lateinit var characterListAdapter: CharacterListAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
+    private lateinit var searchView: SearchView
+    private lateinit var textHola: TextView
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -39,6 +43,8 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false)
         recCharacters = v.findViewById(R.id.rec_characters)
+        searchView = v.findViewById(R.id.searchView)
+        textHola = v.findViewById(R.id.hola)
         return v
     }
 
@@ -48,8 +54,15 @@ class HomeFragment : Fragment() {
         if (prefs.getTipoLista() == "favoritos") {
             characters = (activity as MainActivity).getFavoritos()
             Log.d("PERSONAMANACTVITIARGS", "favoritos")
+
+            textHola.visibility = View.VISIBLE
+            textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
+
+
         } else {
             characters = (activity as MainActivity).getCharacters()
+            searchView.visibility = View.VISIBLE
+
         }
 
         recCharacters.setHasFixedSize(true)

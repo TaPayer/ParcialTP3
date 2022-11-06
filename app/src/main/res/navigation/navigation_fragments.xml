@@ -8,17 +8,12 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.ar.ort.rickmorty.fragments.DetailFragment"
-        android:label="fragment_detail"
+        android:label="Ricky y Morty | Personaje"
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="character"
             app:argType="com.ar.ort.rickmorty.Entities.Character" />
     </fragment>
-    <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.ar.ort.rickmorty.fragments.FavoritesFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ar.ort.rickmorty.fragments.LoginFragment"
@@ -27,12 +22,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ar.ort.rickmorty.fragments.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Ricky y Morty | Preferencias"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ar.ort.rickmorty.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Ricky y Morty"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"

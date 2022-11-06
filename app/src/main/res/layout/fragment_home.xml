@@ -6,7 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_personajes"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.HomeFragment"
+    >
+
+    <TextView
+        android:id="@+id/hola"
+        android:fontFamily="@font/comfortaa_regular"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:layout_editor_absoluteX="10dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_characters"
@@ -19,7 +33,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <SearchView
         android:id="@+id/searchView"
@@ -27,8 +43,11 @@
         android:layout_height="60dp"
         android:layout_margin="10dp"
         android:background="@color/white"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        tools:layout_editor_absoluteX="10dp" />
+        tools:layout_editor_absoluteX="10dp">
+
+    </SearchView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
