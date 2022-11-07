@@ -46,7 +46,6 @@
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         tools:layout_editor_absoluteX="10dp">
-
     </SearchView>
 
     <androidx.constraintlayout.widget.Guideline
@@ -62,4 +61,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="724dp" />
+
+
+    <ImageView
+        android:id="@+id/favoritosNull"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.543"
+        app:srcCompat="@drawable/nohay" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

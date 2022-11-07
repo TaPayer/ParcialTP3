@@ -67,9 +67,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             drawer.openDrawer(GravityCompat.START)
         }
-
         return false
-
     }
 
     fun getCharacters(): ArrayList<Character> {
@@ -77,7 +75,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getFavoritos(): MutableList<Character> {
-
         return prefs.favoritos.toMutableList()
     }
 
@@ -105,7 +102,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     Navigation.findNavController(this, R.id.fragment_container_view)
                         .navigate(R.id.homeFragment)
-
                     prefs.setTipoLista("listaEntera")
                     true
                 }
@@ -114,8 +110,6 @@ class MainActivity : AppCompatActivity() {
                     Navigation.findNavController(this, R.id.fragment_container_view)
                         .navigate(R.id.homeFragment)
                     prefs.setTipoLista("favoritos")
-
-
                     true
                 }
                 R.id.settingsFragment -> {

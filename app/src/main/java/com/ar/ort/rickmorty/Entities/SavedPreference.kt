@@ -46,8 +46,6 @@ class SavedPreference(val context: Context) {
     }
 
     fun agregarFavoritos(character: Character): Boolean {
-
-
         val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
         arrPackage.addAll(set)
         arrPackage.add(character.id.toString())
