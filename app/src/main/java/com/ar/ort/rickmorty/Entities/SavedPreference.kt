@@ -4,13 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.ar.ort.rickmorty.activities.SplashActivity
-import com.ar.ort.rickmorty.api.APIService
-import com.ar.ort.rickmorty.data.CharacterData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
 
 class SavedPreference(val context: Context) {
     private val SHARED_NAME = "RickyMorty"
@@ -54,7 +47,7 @@ class SavedPreference(val context: Context) {
 
     fun agregarFavoritos(character: Character): Boolean {
 
-        retriveSharedValue()
+
         val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
         arrPackage.addAll(set)
         arrPackage.add(character.id.toString())
@@ -88,58 +81,5 @@ class SavedPreference(val context: Context) {
         editor.apply()
         Log.d("storesharedPreferences", "" + set)
     }
-
-    //METODO QUE RECORRE LOS PERSONALES PARA BUSAR LOS FAVORITOS
-    fun retriveSharedValue() {
-        val api = APIService.createAPI()
-        val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
-        arrPackage.addAll(set)
-        for (id in arrPackage) {
-            if (!validarEnFavoritos(id)) {
-                api.getCharacter("${APIService.BASE_URL}${id}")
-                    ?.enqueue(object : Callback<CharacterData?> {
-                        override fun onResponse(
-                            call: Call<CharacterData?>,
-                            a: Response<CharacterData?>
-                        ) {
-                            val character: CharacterData? = (a.body())!!
-                            if (character != null) {
-                                val charaterToShow = Character(
-                                    character.id,
-                                    character.name,
-                                    character.status,
-                                    character.image,
-                                    character.origin.name,
-                                    character.species
-                                )
-                                favoritos.add(charaterToShow)
-                            }
-                        }
-
-                        override fun onFailure(call: Call<CharacterData?>, t: Throwable) {
-                            Log.w("FAILURE", "Failure Call Get")
-                        }
-                    })
-            }
-
-        }
-    }
-
-    fun validarEnFavoritos(id: String): Boolean {
-        var esta = false
-        var i = 0
-        while (i < favoritos.size && !esta)
-            if (favoritos.get(i).id.toString() != id) {
-                Log.d("validatrue", "$id")
-                esta = true
-            } else {
-                i++
-                Log.d("validafalse", "$id")
-            }
-
-        return esta
-
-    }
-
 
 }

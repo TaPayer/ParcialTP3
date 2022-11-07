@@ -2,7 +2,6 @@ package com.ar.ort.rickmorty.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -15,20 +14,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
-import com.ar.ort.rickmorty.api.APIService
-import com.ar.ort.rickmorty.data.CharacterData
-import com.ar.ort.rickmorty.data.ServiceResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -41,9 +30,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        prefs.retriveSharedValue()
 
         personajes =
             intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
@@ -59,10 +45,6 @@ class MainActivity : AppCompatActivity() {
         drawer = findViewById(R.id.drawer_layout_id)
         navigate()
 
-
-        //menu hamburguesa -> comentado para que no aparezca la flecha
-        //NavigationUI.setupActionBarWithNavController(this,navController,drawer)
-
         //Creo una configuración para Toolbar
         appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(),
@@ -76,8 +58,6 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, _, _ ->
             supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburguer)
         }
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -88,8 +68,6 @@ class MainActivity : AppCompatActivity() {
             drawer.openDrawer(GravityCompat.START)
         }
 
-        //Cancelo la navegación
-        //return NavigationUI.navigateUp(navController,drawer)
         return false
 
     }
@@ -156,6 +134,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

@@ -11,6 +11,7 @@ import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.Entities.SavedPreference
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.api.APIService
+import com.ar.ort.rickmorty.data.CharacterData
 import com.ar.ort.rickmorty.data.ServiceResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -35,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
     private val personajes = ArrayList<Character>()
 
     companion object {
-        private const val SPLASH_TIME_OUT: Long = 10000 // 3 seconds
+        private const val SPLASH_TIME_OUT: Long = 3000 // 3 seconds
         lateinit var prefs: SavedPreference
     }
 
@@ -43,9 +44,14 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         intent = Intent(this, MainActivity::class.java)
+
+        //LLAMA A LA API QUE TRAE LOS PERSONAJES
         callApi()
 
         prefs = SavedPreference(this)
+
+        //ARMA LA LISTA DE FAVORITOS EN FUNCION DE LOS ID
+        retriveSharedValue()
 
         findViewById()
 
@@ -54,14 +60,8 @@ class SplashActivity : AppCompatActivity() {
                 FirebaseApp.initializeApp(this)
 
                 if (!prefs.getEmail().isEmpty()) {
-                    //startActivity(Intent(this, MainActivity::class.java))
 
-                    val bundle = Bundle()
-                    bundle.putParcelableArrayList("personajes", personajes)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
-                    Log.w("PERSONAJESLOGUEADO", "$personajes")
-                    prefs.setTipoLista("listaEntera")
+                    goToActivityMain()
 
                 } else {
                     visibility()
@@ -77,13 +77,59 @@ class SplashActivity : AppCompatActivity() {
                         signInGoogle()
                         Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
                     }
-
                 }
-
-
-
             }, SPLASH_TIME_OUT
         )
+    }
+
+    //METODO QUE RECORRE LOS PERSONALES PARA BUSAR LOS FAVORITOS
+    fun retriveSharedValue() {
+        val api = APIService.createAPI()
+        val set: Set<String> = prefs.storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
+        prefs.arrPackage.addAll(set)
+        for (id in prefs.arrPackage) {
+            if (!validarEnFavoritos(id)) {
+                api.getCharacter("${APIService.BASE_URL}${id}")
+                    ?.enqueue(object : Callback<CharacterData?> {
+                        override fun onResponse(
+                            call: Call<CharacterData?>,
+                            a: Response<CharacterData?>
+                        ) {
+                            val character: CharacterData? = (a.body())!!
+                            if (character != null) {
+                                val charaterToShow = Character(
+                                    character.id,
+                                    character.name,
+                                    character.status,
+                                    character.image,
+                                    character.origin.name,
+                                    character.species
+                                )
+                                prefs.favoritos.add(charaterToShow)
+                            }
+                        }
+
+                        override fun onFailure(call: Call<CharacterData?>, t: Throwable) {
+                            Log.w("FAILURE", "Failure Call Get")
+                        }
+                    })
+            }
+        }
+    }
+
+    private fun validarEnFavoritos(id: String): Boolean {
+        var esta = false
+        var i = 0
+        while (i < prefs.favoritos.size && !esta)
+            if (prefs.favoritos.get(i).id.toString() != id) {
+                Log.d("validatrue", "$id")
+                esta = true
+            } else {
+                i++
+                Log.d("validafalse", "$id")
+            }
+
+        return esta
     }
 
     private fun signInGoogle() {
@@ -118,15 +164,19 @@ class SplashActivity : AppCompatActivity() {
                 prefs.setUsername(account.displayName.toString())
                 prefs.savePhoto(account.photoUrl)
 
-              val bundle = Bundle()
-                bundle.putParcelableArrayList("personajes", personajes)
-                intent.putExtras(bundle)
-                startActivity(intent)
-                Log.w("PERSONAJESSINLOGUEAR", "$personajes")
-                prefs.setTipoLista("listaEntera")
+                goToActivityMain()
                 finish()
             }
         }
+    }
+
+    private fun goToActivityMain() {
+        val bundle = Bundle()
+        bundle.putParcelableArrayList("personajes", personajes)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        Log.w("PERSONAJESSINLOGUEAR", "$personajes")
+        prefs.setTipoLista("listaEntera")
     }
 
     private fun findViewById() {
@@ -153,15 +203,26 @@ class SplashActivity : AppCompatActivity() {
                 val response: ServiceResponse? = (response.body())!!
                 if (response != null) {
                     for (ch in response.results) {
-                        personajes.add(Character(ch!!.id, ch!!.name, ch!!.status, ch!!.image,ch!!.origin.name, ch!!.species))
+                        personajes.add(
+                            Character(
+                                ch!!.id,
+                                ch!!.name,
+                                ch!!.status,
+                                ch!!.image,
+                                ch!!.origin.name,
+                                ch!!.species
+                            )
+                        )
                     }
                 }
             }
 
             override fun onFailure(call: Call<ServiceResponse?>, t: Throwable) {
-                Toast.makeText (applicationContext,
+                Toast.makeText(
+                    applicationContext,
                     "Se ha producido un error de carga",
-                    Toast.LENGTH_SHORT)
+                    Toast.LENGTH_SHORT
+                )
                     .show();
             }
         })
