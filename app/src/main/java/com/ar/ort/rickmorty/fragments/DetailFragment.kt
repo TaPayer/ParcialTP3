@@ -1,5 +1,5 @@
 package com.ar.ort.rickmorty.fragments
-
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,14 +10,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.findNavController
 import com.ar.ort.rickmorty.R
+import com.ar.ort.rickmorty.activities.SplashActivity
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.bumptech.glide.Glide
 
 
 class DetailFragment : Fragment() {
-
     lateinit var vista: View
     lateinit var btnFav: Button
     lateinit var charImg: ImageView
@@ -30,11 +29,8 @@ class DetailFragment : Fragment() {
     lateinit var alive: ImageView
 
 
-    var characters: MutableList<Character> = ArrayList<Character>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -95,8 +91,6 @@ class DetailFragment : Fragment() {
             //Hardcodeado para testeo
             Log.i("PERSONAJE", "${personaje.charName}")
 
-
-
             //mando el personaje para que persista el id
             var resp = prefs.agregarFavoritos(personaje)
 
@@ -105,14 +99,12 @@ class DetailFragment : Fragment() {
                 Toast.makeText(getActivity(), "Ya lo tenés momia!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Agregado a Favoritos!", Toast.LENGTH_SHORT).show();
-
             }
-            val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
-            view?.findNavController()?.navigate(action)
+
+            val intent = Intent (activity , SplashActivity::class.java)
+            activity?.startActivity(intent)
         }
     }
-
-
 }
 
 

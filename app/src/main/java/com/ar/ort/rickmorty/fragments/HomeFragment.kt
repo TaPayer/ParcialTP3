@@ -45,8 +45,6 @@ class HomeFragment : Fragment() {
         recCharacters = v.findViewById(R.id.rec_characters)
         searchView = v.findViewById(R.id.searchView)
         textHola = v.findViewById(R.id.hola)
-
-
         return v
     }
 
@@ -56,7 +54,6 @@ class HomeFragment : Fragment() {
         if (prefs.getTipoLista() == "favoritos") {
             characters = (activity as MainActivity).getFavoritos()
 
-
             textHola.visibility = View.VISIBLE
             textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
 
@@ -64,12 +61,9 @@ class HomeFragment : Fragment() {
         } else {
             characters = (activity as MainActivity).getCharacters()
             searchView.visibility = View.VISIBLE
-
         }
 
         recCharacters.setHasFixedSize(true)
-
-        //linearlayoutManager = LinearLayoutManager(context)
 
         val numberOfColumns = 2
         gridLayoutManager = GridLayoutManager(context, numberOfColumns)
@@ -81,16 +75,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
     fun onItemClick(position: Int): Boolean {
         // PARA NAVEGAR A LA VENTANA DE DETALLE
         val character = characters[position]
         Log.d(character.name.toString(), "QUE ES PRODUCTO")
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
         view?.findNavController()?.navigate(action)
-
         return true
     }
 }
-
