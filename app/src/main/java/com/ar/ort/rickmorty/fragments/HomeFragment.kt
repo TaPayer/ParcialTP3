@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var searchView: SearchView
     private lateinit var textHola: TextView
+    private lateinit var imageFavoritosNull: ImageView
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -45,6 +47,7 @@ class HomeFragment : Fragment() {
         recCharacters = v.findViewById(R.id.rec_characters)
         searchView = v.findViewById(R.id.searchView)
         textHola = v.findViewById(R.id.hola)
+        imageFavoritosNull = v.findViewById(R.id.favoritosNull)
         return v
     }
 
@@ -53,9 +56,17 @@ class HomeFragment : Fragment() {
         //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
         if (prefs.getTipoLista() == "favoritos") {
             characters = (activity as MainActivity).getFavoritos()
-
             textHola.visibility = View.VISIBLE
             textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
+            if(sizeFavoritos()>0){
+                characters = (activity as MainActivity).getFavoritos()
+                textHola.visibility = View.VISIBLE
+                textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
+            }else{
+                textHola.visibility = View.VISIBLE
+                textHola.text = "Hola ${prefs.getUsername()}!, por el momento no tenés personajes favoritos!"
+                imageFavoritosNull.visibility = View.VISIBLE
+            }
         } else {
             characters = (activity as MainActivity).getCharacters()
             searchView.visibility = View.VISIBLE
@@ -79,5 +90,9 @@ class HomeFragment : Fragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
         view?.findNavController()?.navigate(action)
         return true
+    }
+
+    fun sizeFavoritos(): Int {
+        return prefs.favoritos.size
     }
 }
