@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
     private val personajes = ArrayList<Character>()
 
     companion object {
-        private const val SPLASH_TIME_OUT: Long = 3000 // 3 seconds
+        private const val SPLASH_TIME_OUT: Long = 4000 // 3 seconds
         lateinit var prefs: SavedPreference
     }
 

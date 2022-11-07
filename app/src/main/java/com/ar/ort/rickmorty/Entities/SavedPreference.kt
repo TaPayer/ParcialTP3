@@ -45,31 +45,11 @@ class SavedPreference(val context: Context) {
         storage.edit().putString(PHOTO, photo.toString()).apply()
     }
 
-    fun agregarFavoritos(character: Character): Boolean {
-
-
+    fun agregarFavoritos(character: Character) {
         val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
         arrPackage.addAll(set)
         arrPackage.add(character.id.toString())
-
-        //BUSCO SI YA LO TIENE PARA MANDAR MENSAJE
-        var res = false
-        var i = 0
-        while (i < favoritos.size && !res) {
-            if (favoritos.get(i).id == character.id) {
-                res = true;
-                Log.d("AGREGADO", "${character.id} ${favoritos.get(i).id}")
-
-            } else {
-                Log.d("NOLOTIENE", "${character.id} ${favoritos.get(i).id}")
-                i++
-
-            }
-        }
-
         packagesharedPreferences()
-        return res
-
     }
 
     //METODO QUE PERSISTE LA LISTA DE IDCADA VEZ QUE SE MODIFICA
