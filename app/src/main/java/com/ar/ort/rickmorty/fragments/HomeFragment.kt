@@ -53,6 +53,7 @@ class HomeFragment : Fragment() {
         //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
         if (prefs.getTipoLista() == "favoritos") {
             characters = (activity as MainActivity).getFavoritos()
+
             textHola.visibility = View.VISIBLE
             textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
         } else {
@@ -61,8 +62,6 @@ class HomeFragment : Fragment() {
         }
 
         recCharacters.setHasFixedSize(true)
-
-        //linearlayoutManager = LinearLayoutManager(context)
 
         val numberOfColumns = 2
         gridLayoutManager = GridLayoutManager(context, numberOfColumns)
@@ -79,8 +78,6 @@ class HomeFragment : Fragment() {
         val character = characters[position]
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
         view?.findNavController()?.navigate(action)
-
         return true
     }
 }
-

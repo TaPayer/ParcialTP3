@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -23,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -57,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         prefs.retriveSharedValue()
         personajes =
             intent.getParcelableArrayListExtra<Character>("personajes") as ArrayList<Character>
@@ -72,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         //buscar el DrawerLayout
         drawer = findViewById(R.id.drawer_layout_id)
         navigate()
+
 
         //menu hamburguesa -> comentado para que no aparezca la flecha
         //NavigationUI.setupActionBarWithNavController(this,navController,drawer)
@@ -112,8 +110,6 @@ class MainActivity : AppCompatActivity() {
             drawer.openDrawer(GravityCompat.START)
         }
 
-        //Cancelo la navegación
-        //return NavigationUI.navigateUp(navController,drawer)
         return false
 
     }
@@ -180,6 +176,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
