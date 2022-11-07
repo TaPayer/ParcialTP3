@@ -55,6 +55,9 @@ class HomeFragment : Fragment() {
         super.onStart()
         //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
         if (prefs.getTipoLista() == "favoritos") {
+            characters = (activity as MainActivity).getFavoritos()
+            textHola.visibility = View.VISIBLE
+            textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
             if(sizeFavoritos()>0){
                 characters = (activity as MainActivity).getFavoritos()
                 textHola.visibility = View.VISIBLE
@@ -84,7 +87,6 @@ class HomeFragment : Fragment() {
     fun onItemClick(position: Int): Boolean {
         // PARA NAVEGAR A LA VENTANA DE DETALLE
         val character = characters[position]
-        Log.d(character.name.toString(), "QUE ES PRODUCTO")
         val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(character)
         view?.findNavController()?.navigate(action)
         return true
