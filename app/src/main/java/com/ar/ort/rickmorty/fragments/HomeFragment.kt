@@ -45,6 +45,8 @@ class HomeFragment : Fragment() {
         recCharacters = v.findViewById(R.id.rec_characters)
         searchView = v.findViewById(R.id.searchView)
         textHola = v.findViewById(R.id.hola)
+
+
         return v
     }
 
@@ -53,7 +55,7 @@ class HomeFragment : Fragment() {
         //VALIDA PARA VER QUE LISTA MUESTRA POR PANTALLA
         if (prefs.getTipoLista() == "favoritos") {
             characters = (activity as MainActivity).getFavoritos()
-            Log.d("PERSONAMANACTVITIARGS", "favoritos")
+
 
             textHola.visibility = View.VISIBLE
             textHola.text = "Hola ${prefs.getUsername()}!, estos son tus personajes favoritos!"
@@ -79,10 +81,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        //characters.clear()
-    }
+
 
     fun onItemClick(position: Int): Boolean {
         // PARA NAVEGAR A LA VENTANA DE DETALLE

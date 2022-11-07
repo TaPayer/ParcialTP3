@@ -1,41 +1,70 @@
 {
   "project_info": {
-    "project_number": "1093587897175",
-    "project_id": "rickmorty-ec0da",
-    "storage_bucket": "rickmorty-ec0da.appspot.com"
+    "project_number": "34263398689",
+    "project_id": "rickandmorty-31e68",
+    "storage_bucket": "rickandmorty-31e68.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1093587897175:android:e3c7055dec1d011f974c12",
+        "mobilesdk_app_id": "1:34263398689:android:719ead411e860e64f92660",
         "android_client_info": {
           "package_name": "com.ar.ort.rickmorty"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1093587897175-5frkgg2bul4j5gar51jtbl5dol12a2r3.apps.googleusercontent.com",
+          "client_id": "34263398689-3h3arq42lafuuto79pfadrqs6rok9gpf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ar.ort.rickmorty",
-            "certificate_hash": "3940df5178281b5d9b74549e67352b89b5be4528"
+            "certificate_hash": "16997eba59154572d59759f21d0cec6a7630d8d5"
           }
         },
         {
-          "client_id": "1093587897175-v88jq2mb88vpfl8pn4r27sk1qr0n4lk3.apps.googleusercontent.com",
+          "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBX6Y1lEh8FX6CbBxqu4NVtJ6FEPCX6LGU"
+          "current_key": "AIzaSyCTtwyEAa0SNaaAUlnroWbl_T-g8sW9dI4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1093587897175-v88jq2mb88vpfl8pn4r27sk1qr0n4lk3.apps.googleusercontent.com",
+              "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34263398689:android:b751719a468b8eeef92660",
+        "android_client_info": {
+          "package_name": "com.example.amlode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTtwyEAa0SNaaAUlnroWbl_T-g8sW9dI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34263398689-8fnthcnvjcofnjs2el7jcndg0dics994.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

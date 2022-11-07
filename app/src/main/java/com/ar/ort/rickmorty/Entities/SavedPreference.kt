@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import com.ar.ort.rickmorty.activities.SplashActivity
 import com.ar.ort.rickmorty.api.APIService
 import com.ar.ort.rickmorty.data.CharacterData
 import retrofit2.Call
@@ -19,24 +20,8 @@ class SavedPreference(val context: Context) {
     private var TIPOLISTA = "tipolista"
     var favoritos: MutableList<Character> = ArrayList()
     val storage = context.getSharedPreferences(SHARED_NAME, 0)
-    var arrPackage:  HashSet<String> = hashSetOf()
+    var arrPackage: HashSet<String> = hashSetOf()
     val set: MutableSet<String> = HashSet()
-
-    fun agregarFavoritos(character: Character ) {
-        retriveSharedValue()
-        if(arrPackage.isNotEmpty()){
-            for (id in arrPackage) {
-                if(id.toInt() != character.id){
-
-                    arrPackage.add(character.id.toString())
-                    packagesharedPreferences()
-                }
-            }
-        }else{
-            arrPackage.add(character.id.toString())
-            packagesharedPreferences()
-        }
-    }
 
 
     fun setTipoLista(tipolista: String) {
@@ -67,6 +52,34 @@ class SavedPreference(val context: Context) {
         storage.edit().putString(PHOTO, photo.toString()).apply()
     }
 
+    fun agregarFavoritos(character: Character): Boolean {
+
+        retriveSharedValue()
+        val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
+        arrPackage.addAll(set)
+        arrPackage.add(character.id.toString())
+
+        //BUSCO SI YA LO TIENE PARA MANDAR MENSAJE
+        var res = false
+        var i = 0
+        while (i < favoritos.size && !res) {
+            if (favoritos.get(i).id == character.id) {
+                res = true;
+                Log.d("AGREGADO", "${character.id} ${favoritos.get(i).id}")
+
+            } else {
+                Log.d("NOLOTIENE", "${character.id} ${favoritos.get(i).id}")
+                i++
+
+            }
+        }
+
+        packagesharedPreferences()
+        return res
+
+    }
+
+    //METODO QUE PERSISTE LA LISTA DE IDCADA VEZ QUE SE MODIFICA
     private fun packagesharedPreferences() {
         val editor: SharedPreferences.Editor = storage.edit()
         val set: MutableSet<String> = HashSet()
@@ -76,28 +89,57 @@ class SavedPreference(val context: Context) {
         Log.d("storesharedPreferences", "" + set)
     }
 
+    //METODO QUE RECORRE LOS PERSONALES PARA BUSAR LOS FAVORITOS
     fun retriveSharedValue() {
         val api = APIService.createAPI()
         val set: Set<String> = storage.getStringSet("DATE_LIST", HashSet()) as Set<String>
         arrPackage.addAll(set)
         for (id in arrPackage) {
-            api.getCharacter("${APIService.BASE_URL}${id}")
-                ?.enqueue(object : Callback<CharacterData?> {
-                    override fun onResponse(call: Call<CharacterData?>, a: Response<CharacterData?>) {
-                        val character: CharacterData? = (a.body())!!
-                        if (character != null) {
-                            val charaterToShow = Character(character.id, character.name, character.status, character.image, character.origin.name, character.species )
-                            favoritos.add(charaterToShow)
+            if (!validarEnFavoritos(id)) {
+                api.getCharacter("${APIService.BASE_URL}${id}")
+                    ?.enqueue(object : Callback<CharacterData?> {
+                        override fun onResponse(
+                            call: Call<CharacterData?>,
+                            a: Response<CharacterData?>
+                        ) {
+                            val character: CharacterData? = (a.body())!!
+                            if (character != null) {
+                                val charaterToShow = Character(
+                                    character.id,
+                                    character.name,
+                                    character.status,
+                                    character.image,
+                                    character.origin.name,
+                                    character.species
+                                )
+                                favoritos.add(charaterToShow)
+                            }
                         }
-                    }
-                    override fun onFailure(call: Call<CharacterData?>, t: Throwable) {
-                        Log.w("FAILURE", "Failure Call Get")
-                    }
-                })
+
+                        override fun onFailure(call: Call<CharacterData?>, t: Throwable) {
+                            Log.w("FAILURE", "Failure Call Get")
+                        }
+                    })
+            }
+
         }
     }
+
+    fun validarEnFavoritos(id: String): Boolean {
+        var esta = false
+        var i = 0
+        while (i < favoritos.size && !esta)
+            if (favoritos.get(i).id.toString() != id) {
+                Log.d("validatrue", "$id")
+                esta = true
+            } else {
+                i++
+                Log.d("validafalse", "$id")
+            }
+
+        return esta
+
+    }
+
+
 }
-
-
-
-

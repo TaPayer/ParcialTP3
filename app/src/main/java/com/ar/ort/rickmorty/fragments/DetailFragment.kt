@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.bumptech.glide.Glide
@@ -88,16 +89,26 @@ class DetailFragment : Fragment() {
             .load(img)
             .into(charImg)
 
-        //VOLVER AL LISTADO
+        //AGREGAR A FAVORITOS
         btnFav.setOnClickListener {
-            //aca agrega el personaje a la lista de favoritos
-            Toast.makeText(getActivity(), "Agregado a Favoritos", Toast.LENGTH_SHORT).show();
+
             //Hardcodeado para testeo
             Log.i("PERSONAJE", "${personaje.charName}")
 
-            prefs.agregarFavoritos(personaje)
 
 
+            //mando el personaje para que persista el id
+            var resp = prefs.agregarFavoritos(personaje)
+
+            //devuelvo mensaje
+            if (resp) {
+                Toast.makeText(getActivity(), "Ya lo tenés momia!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Agregado a Favoritos!", Toast.LENGTH_SHORT).show();
+
+            }
+            val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
+            view?.findNavController()?.navigate(action)
         }
     }
 

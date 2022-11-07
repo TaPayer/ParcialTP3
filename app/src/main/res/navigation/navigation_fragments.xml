@@ -13,6 +13,9 @@
         <argument
             android:name="character"
             app:argType="com.ar.ort.rickmorty.Entities.Character" />
+        <action
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
