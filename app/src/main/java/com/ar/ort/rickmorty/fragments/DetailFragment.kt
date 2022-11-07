@@ -1,8 +1,8 @@
 package com.ar.ort.rickmorty.fragments
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +10,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.ar.ort.rickmorty.Entities.Character
 import com.ar.ort.rickmorty.R
 import com.ar.ort.rickmorty.activities.SplashActivity
 import com.ar.ort.rickmorty.activities.SplashActivity.Companion.prefs
 import com.bumptech.glide.Glide
+
 
 
 class DetailFragment : Fragment() {
@@ -91,20 +95,51 @@ class DetailFragment : Fragment() {
             //Hardcodeado para testeo
             Log.i("PERSONAJE", "${personaje.charName}")
 
-            //mando el personaje para que persista el id
-            var resp = prefs.agregarFavoritos(personaje)
+            var validarOk = validarFavorito(personaje)
+            agregarFavorito(validarOk, personaje)
+        }
+    }
 
-            //devuelvo mensaje
-            if (resp) {
-                Toast.makeText(getActivity(), "Ya lo tenés momia!", Toast.LENGTH_SHORT).show();
+    //BUSCO SI YA LO TIENE PARA MANDAR MENSAJE
+    fun validarFavorito(character: Character): Boolean {
+        var res = false
+        var i = 0
+        while (i < prefs.favoritos.size && !res) {
+            if (prefs.favoritos.get(i).id.toString() == character.id.toString()) {
+                Log.d("LOTIENE", "${character.id} ${prefs.favoritos.get(i).id}")
+                res = true;
+
             } else {
-                Toast.makeText(getActivity(), "Agregado a Favoritos!", Toast.LENGTH_SHORT).show();
+                Log.d("NOLOTIENE", "${character.id} ${prefs.favoritos.get(i).id}")
+                i++
             }
+        }
+        return res
+    }
 
-            val intent = Intent (activity , SplashActivity::class.java)
+    fun agregarFavorito(resp: Boolean, personaje: Character): Boolean {
+        var res = false
+        if (!resp) {
+            prefs.agregarFavoritos(personaje)
+            val intent = Intent(activity, SplashActivity::class.java)
             activity?.startActivity(intent)
+            res = true
+        }
+        avisos(res)
+        return res
+    }
+
+    fun avisos(resp: Boolean) {
+        if (resp) {
+            Toast.makeText(getActivity(), "Agregado a Favoritos!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "Ya lo tenés momia!", Toast.LENGTH_SHORT).show();
+            val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
+            view?.findNavController()?.navigate(action)
         }
     }
 }
+
+
 
 
