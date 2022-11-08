@@ -26,12 +26,12 @@ class SavedPreference(val context: Context) {
         return storage.getString(TIPOLISTA, "")!!
     }
 
-    fun setBuscador(estado: String) {
-        storage.edit().putString(BUSCADOR_HABILITADO, estado).apply()
+    fun setBuscador(estado: Boolean) {
+        storage.edit().putBoolean(BUSCADOR_HABILITADO, estado).apply()
     }
 
-    fun getBuscador(): String {
-        return storage.getString(BUSCADOR_HABILITADO, "")!!
+    fun getBuscador(): Boolean {
+        return storage.getBoolean(BUSCADOR_HABILITADO, false)!!
     }
 
     fun setFavoritos(estado: String) {

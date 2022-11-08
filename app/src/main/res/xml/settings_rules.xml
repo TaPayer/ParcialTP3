@@ -15,7 +15,7 @@
         android:key="buscador_setting"
         android:title="Buscador habilitado" />
     <SwitchPreference
-        android:id="@+id/favoritos"
+        android:id="@+id/favoritos_setting"
         android:defaultValue="true"
         android:key="favoritos_setting"
         android:title="Permitir agregar a favoritos" />

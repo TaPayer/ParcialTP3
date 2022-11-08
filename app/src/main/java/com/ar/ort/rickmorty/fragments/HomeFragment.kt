@@ -1,7 +1,6 @@
 package com.ar.ort.rickmorty.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +69,12 @@ class HomeFragment : Fragment() {
         } else {
             characters = (activity as MainActivity).getCharacters()
             searchView.visibility = View.VISIBLE
+
+            if(!prefs.getBuscador()){
+                enableSearchView(searchView, false)
+            } else {
+                enableSearchView(searchView, true)
+            }
         }
 
         recCharacters.setHasFixedSize(true)
@@ -81,6 +86,17 @@ class HomeFragment : Fragment() {
 
         recCharacters.adapter = CharacterListAdapter(characters) { x ->
             onItemClick(x)
+        }
+    }
+
+    private fun enableSearchView(view: View, enabled: Boolean) {
+        view.isEnabled = enabled
+        if (view is ViewGroup) {
+            val viewGroup = view
+            for (i in 0 until viewGroup.childCount) {
+                val child = viewGroup.getChildAt(i)
+                enableSearchView(child, enabled)
+            }
         }
     }
 

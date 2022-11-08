@@ -51,18 +51,18 @@ class MainActivity : AppCompatActivity() {
                 val puede_buscar = argPrefs.getBoolean("buscador_setting", false)
                 if(puede_buscar){
                     //Un set buscador
-                    prefs.setBuscador("enabled")
+                    prefs.setBuscador(true)
                 } else {
-                    prefs.setBuscador("disabled")
+                    prefs.setBuscador(false)
                 }
             }
 
-            if (key == "favoritos"){
-                val puede_favorear = argPrefs.getBoolean("favoritos", false)
+            if (key == "favoritos_setting"){
+                val puede_favorear = argPrefs.getBoolean("favoritos_setting", false)
                 if(puede_favorear){
                     prefs.setFavoritos("enabled")
                 } else {
-                    prefs.setBuscador("disabled")
+                    prefs.setFavoritos("disabled")
                 }
             }
         }
