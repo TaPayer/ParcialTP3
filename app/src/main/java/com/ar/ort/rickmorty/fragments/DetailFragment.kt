@@ -84,6 +84,10 @@ class DetailFragment : Fragment() {
             alive.visibility = View.VISIBLE
         }
 
+        if (prefs.getFavoritos() == "disabled") {
+            btnFav.visibility = View.GONE
+        }
+
         val img = DetailFragmentArgs.fromBundle(requireArguments()).character.charImg
         Glide.with(vista)
             .load(img)

@@ -11,11 +11,12 @@ class SavedPreference(val context: Context) {
     private val USERNAME = "username"
     private var PHOTO = "photo"
     private var TIPOLISTA = "tipolista"
+    private var BUSCADOR_HABILITADO = "buscador_habilitado"
+    private var FAVORITOS_HABILITADO = "favoritos_habilitado"
     var favoritos: MutableList<Character> = ArrayList()
     val storage = context.getSharedPreferences(SHARED_NAME, 0)
     var arrPackage: HashSet<String> = hashSetOf()
     val set: MutableSet<String> = HashSet()
-
 
     fun setTipoLista(tipolista: String) {
         storage.edit().putString(TIPOLISTA, tipolista).apply()
@@ -23,6 +24,22 @@ class SavedPreference(val context: Context) {
 
     fun getTipoLista(): String {
         return storage.getString(TIPOLISTA, "")!!
+    }
+
+    fun setBuscador(estado: String) {
+        storage.edit().putString(BUSCADOR_HABILITADO, estado).apply()
+    }
+
+    fun getBuscador(): String {
+        return storage.getString(BUSCADOR_HABILITADO, "")!!
+    }
+
+    fun setFavoritos(estado: String) {
+        storage.edit().putString(FAVORITOS_HABILITADO, estado).apply()
+    }
+
+    fun getFavoritos(): String {
+        return storage.getString(FAVORITOS_HABILITADO, "")!!
     }
 
     fun setEmail(email: String) {

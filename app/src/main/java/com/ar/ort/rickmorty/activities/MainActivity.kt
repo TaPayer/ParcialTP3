@@ -34,24 +34,39 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         checkTheme()
-
         var settingsPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        var listener = OnSharedPreferenceChangeListener { prefs, key ->
+        var listener = OnSharedPreferenceChangeListener { argPrefs, key ->
             if (key == "night_mode_setting") {
-                Log.d(key,"es key?")
-                val theme = prefs.getBoolean("night_mode_setting", false);
+                val theme = argPrefs.getBoolean("night_mode_setting", false)
                 if (theme) {
-                    Log.d("el if  ", "entre al wof")
                     setTheme(R.style.darkTheme)
                     recreate();
                 } else {
-                    Log.d("app theme ", "entre al else")
                     setTheme(R.style.AppTheme)
                     recreate();
                 }
             }
+
+            if (key == "buscador_setting"){
+                val puede_buscar = argPrefs.getBoolean("buscador_setting", false)
+                if(puede_buscar){
+                    //Un set buscador
+                    prefs.setBuscador("enabled")
+                } else {
+                    prefs.setBuscador("disabled")
+                }
+            }
+
+            if (key == "favoritos"){
+                val puede_favorear = argPrefs.getBoolean("favoritos", false)
+                if(puede_favorear){
+                    prefs.setFavoritos("enabled")
+                } else {
+                    prefs.setBuscador("disabled")
+                }
+            }
         }
-        Log.d("666", "errorcito")
+
         settingsPref.registerOnSharedPreferenceChangeListener(listener)
 
         super.onCreate(savedInstanceState)
