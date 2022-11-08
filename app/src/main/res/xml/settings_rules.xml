@@ -2,21 +2,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:textColor="#5C6BC0"
         android:title="Configuracion">
 
     </PreferenceCategory>
     <SwitchPreference
         android:defaultValue="false"
         android:key="night_mode_setting"
-        android:title="Night Mode" />
+        android:title="Night Mode"
+        android:icon="@drawable/luna"/>
     <SwitchPreference
         android:defaultValue="true"
         android:key="buscador_setting"
-        android:title="Buscador habilitado" />
+        android:title="Buscador habilitado"
+        android:icon="@drawable/buscar"/>
     <SwitchPreference
         android:id="@+id/favoritos_setting"
         android:defaultValue="true"
         android:key="favoritos_setting"
-        android:title="Permitir agregar a favoritos" />
+        android:title="Permitir agregar a favoritos"
+        android:icon="@drawable/favorito"/>
 </PreferenceScreen>
