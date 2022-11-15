@@ -2,6 +2,13 @@
 
 Rick & Morty es una aplicación Android que te permite ver la información detallada de los personajes de la serie, y además poder agregar tus favoritos a una lista. 
 
+## Integrantes
+- Ferrari Verónica
+- Capua Camila
+- Osses Macchia Germán
+- Payer Tomás
+- Da Costa Sofía
+
 ## Pre requisitos
 
 Para poder iniciar la aplicación Rick & Morty, es necesario contar con el entorno de desarrollo Android Studio y la versión de Gradle 7.0.2.
