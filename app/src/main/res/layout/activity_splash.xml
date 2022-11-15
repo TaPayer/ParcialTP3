@@ -51,6 +51,42 @@
         app:layout_constraintTop_toBottomOf="@+id/btnContinuar"
         app:srcCompat="@drawable/google" />
 
+    <EditText
+        android:id="@+id/input_user"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:fontFamily="@font/comfortaa_regular"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:hint="@string/login_user"
+        android:visibility="invisible"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <EditText
+        android:id="@+id/input_pass"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:fontFamily="@font/comfortaa_regular"
+        android:gravity="center"
+        android:hint="@string/login_pass"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779" />
+
     <Button
         android:id="@+id/btnContinuar"
         android:layout_width="wrap_content"
@@ -61,8 +97,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintTop_toBottomOf="@+id/input_pass" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

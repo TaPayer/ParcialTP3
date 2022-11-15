@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var personajes: ArrayList<Character>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         checkTheme()
         var settingsPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         var listener = OnSharedPreferenceChangeListener { argPrefs, key ->
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logOut() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
@@ -149,7 +150,13 @@ class MainActivity : AppCompatActivity() {
             prefs.setUsername("")
             startActivity(intent)
             finish()
-        }
+        }*/
+        val intent = Intent(this, SplashActivity::class.java)
+        Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+        prefs.setEmail("")
+        prefs.setUsername("")
+        startActivity(intent)
+        finish()
     }
 
     private fun navigate() {

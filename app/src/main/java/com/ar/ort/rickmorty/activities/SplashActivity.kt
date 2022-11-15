@@ -35,8 +35,12 @@ class SplashActivity : AppCompatActivity() {
     val Req_Code: Int = 123
     private val personajes = ArrayList<Character>()
 
+    //sin firebase
+    lateinit var userName: EditText
+    lateinit var userPass: EditText
+
     companion object {
-        private const val SPLASH_TIME_OUT: Long = 5000 
+        private const val SPLASH_TIME_OUT: Long = 5000
         lateinit var prefs: SavedPreference
     }
 
@@ -57,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed(
             {
-                FirebaseApp.initializeApp(this)
+                //FirebaseApp.initializeApp(this)
 
                 if (!prefs.getEmail().isEmpty()) {
 
@@ -65,16 +69,31 @@ class SplashActivity : AppCompatActivity() {
 
                 } else {
                     visibility()
-                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    /*val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestIdToken(getString(R.string.default_web_client_id))
                         .requestEmail()
-                        .build()
+                        .build()*/
 
-                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-                    firebaseAuth = FirebaseAuth.getInstance()
+                   // mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    //firebaseAuth = FirebaseAuth.getInstance()
 
                     btnContinuar.setOnClickListener {
-                        signInGoogle()
+                        //signInGoogle()
+
+                        if (userName.text.toString().isNotEmpty() && userPass.text.toString()
+                                .isNotEmpty()
+                        ) {
+                            prefs.setEmail(userName.text.toString())
+                            prefs.setUsername(userName.text.toString())
+
+                            goToActivityMain()
+
+
+                        } else {
+                            Toast.makeText(this, "Error! Faltan Datos!", Toast.LENGTH_SHORT).show()
+
+                        }
+
                         Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -183,10 +202,15 @@ class SplashActivity : AppCompatActivity() {
         splash = findViewById(R.id.splash)
         googleLogo = findViewById(R.id.googleLogo)
         btnContinuar = findViewById(R.id.btnContinuar)
+
+        userName = findViewById(R.id.input_user)
+        userPass = findViewById(R.id.input_pass)
     }
 
     private fun visibility() {
-        googleLogo.visibility = View.VISIBLE
+        //googleLogo.visibility = View.VISIBLE
+        userName.visibility = View.VISIBLE
+        userPass.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
         splash.visibility = View.GONE
     }
